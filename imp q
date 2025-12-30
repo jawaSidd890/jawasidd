@@ -1,0 +1,19 @@
+Absolutely, let me give you a solid sample answer that’s a bit more on the technical side. You can use this as a template.
+
+---
+
+**Sample Answer:**
+
+“Sure! To design a resilient and scalable AWS architecture for a critical production application, I’d focus on a multi-AZ setup.
+
+I’d start by using multiple Availability Zones within a single AWS region to ensure high availability. For example, I’d deploy the application servers on EC2 instances spread across at least two or three AZs. That way, if one AZ goes down, traffic can fail over to the other AZs seamlessly.
+
+For scalability, I’d use an Auto Scaling Group for the EC2 instances, so the application can automatically scale out or in based on demand. I’d also place an Elastic Load Balancer in front of these instances to distribute traffic evenly and improve fault tolerance.
+
+For storage, I’d rely on S3 for static assets and backups, and use RDS with Multi-AZ deployments for the database layer to ensure database failover capability. I’d also implement VPCs with private and public subnets, using security groups and NACLs to lock down access and enhance security.
+
+Finally, I’d use CloudWatch for monitoring and set up alarms for any unusual activity or performance degradation. That way, the architecture is not just resilient and scalable, but also easy to maintain and monitor.”
+
+---
+
+Feel free to adapt that answer in your own words! If you’ve got any more questions or want to try another interview question, just let me know.
