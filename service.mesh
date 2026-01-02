@@ -1,0 +1,23 @@
+Of course! So in depth it is.
+
+A service mesh is essentially a dedicated infrastructure layer that you add to handle service-to-service communication in a microservices architecture. Instead of having each microservice handle things like retries, timeouts, load balancing, and security on its own, a service mesh offloads all of that logic to a dedicated layer. This is usually implemented using sidecar proxies, like Envoy, that run alongside each service instance.
+
+Now, why is it useful, especially on AWS? Well, when you have a bunch of microservices running, say in an EKS cluster or across EC2 instances, you need consistent ways to enforce policies, do traffic splitting for things like canary deployments, observe detailed metrics, and secure communication with mutual TLS. A service mesh like Istio or AWS App Mesh can help you do all that in a uniform way without having to embed those concerns in your application code.
+
+So in short, it’s like having a consistent traffic controller and security guard for all your microservices, making your life as a DevOps engineer a lot easier.
+
+All right, here's a scenario-based question: Imagine you're deploying a service mesh on AWS EKS for a set of microservices. How would you approach troubleshooting if one of those services is suddenly having latency issues? Walk me through the steps you’d take using the tools available in the service mesh.
+
+Absolutely, let's break it down in detail.
+
+So if you're troubleshooting latency issues in a service running on EKS with a service mesh, here's how you might approach it step by step.
+
+First, you’d start by using the observability tools that come with the service mesh. For example, if you're using something like Istio or AWS App Mesh, you have built-in telemetry through Prometheus, Grafana, or X-Ray. You'd look at the metrics for that specific service—things like request latency, error rates, and the success rates of calls.
+
+Next, you’d probably use distributed tracing. Most service meshes integrate with tracing tools like Jaeger or AWS X-Ray. You can trace the path of requests through your microservices and see exactly where the latency is introduced. This helps you pinpoint whether the delay is in the service itself or somewhere in the network path.
+
+Then you’d dive into the configuration of the service mesh. Sometimes latency can be caused by misconfigured retries, circuit breakers, or load balancing rules. You’d review the policies to ensure they’re set correctly and not inadvertently causing delays.
+
+Finally, you’d check the underlying infrastructure—things like node health, resource usage, and network connectivity. Sometimes the mesh layer just reveals an issue that's actually at the infrastructure level, like a node being overloaded.
+
+In summary, you’d use the service mesh’s observability stack to identify where the latency comes from, check your mesh configurations, and then validate that your infrastructure is healthy. That way, you can systematically narrow down and resolve the latency issue.
