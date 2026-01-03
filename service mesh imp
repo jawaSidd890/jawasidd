@@ -1,0 +1,264 @@
+Jawahar, since you are preparing for **L1–L2 DevOps / SRE interviews** and already working on **EKS, Kubernetes, CI/CD & microservices**, Service Mesh is a **hot topic** especially for banks & enterprise platforms.
+Here are the **most important Service Mesh Interview Questions with Expected Answers** 👇
+
+---
+
+# 🔷 1. What is a Service Mesh?
+
+**Expected Answer:**
+A **Service Mesh** is an infrastructure layer that manages **service-to-service communication** inside a microservices architecture.
+It provides:
+
+* Traffic management
+* Security (mTLS)
+* Observability
+* Reliability (retries, timeouts, circuit breakers)
+
+It works without changing application code.
+
+Examples:
+
+* Istio
+* Linkerd
+* AWS App Mesh
+
+---
+
+# 🔷 2. Why do we need Service Mesh when Kubernetes already has networking?
+
+**Expected Answer:**
+Kubernetes provides **basic L3/L4 networking** (IP, ports, DNS).
+But modern microservices need **L7 features** like:
+
+* Request routing
+* Retries
+* Rate limiting
+* Authentication
+* Encryption
+* Tracing
+
+Kubernetes **cannot do this natively**.
+Service Mesh adds **application-aware networking**.
+
+---
+
+# 🔷 3. What problem does Service Mesh solve?
+
+It solves:
+
+| Problem         | Without Mesh        | With Mesh          |
+| --------------- | ------------------- | ------------------ |
+| Security        | No encryption       | mTLS               |
+| Observability   | Logs only           | Metrics, tracing   |
+| Traffic control | Very limited        | Canary, blue/green |
+| Resilience      | App handles retries | Mesh handles       |
+
+---
+
+# 🔷 4. What is a Sidecar Proxy?
+
+**Expected Answer:**
+A **sidecar proxy (Envoy)** runs alongside each pod and intercepts **all inbound & outbound traffic**.
+
+So:
+App → Envoy → Network → Envoy → App
+
+This allows the mesh to:
+
+* Control traffic
+* Encrypt traffic
+* Collect metrics
+  without touching application code.
+
+---
+
+# 🔷 5. Explain Istio Architecture
+
+Istio has two planes:
+
+### Control Plane
+
+* **istiod**
+
+  * Policy
+  * Security (certs)
+  * Config distribution
+
+### Data Plane
+
+* **Envoy proxies** inside every pod
+
+istiod tells Envoy:
+
+* where to route
+* how to secure
+* what rules to apply
+
+---
+
+# 🔷 6. What is mTLS in Service Mesh?
+
+**Expected Answer:**
+mTLS (Mutual TLS) means:
+
+* Client proves its identity
+* Server proves its identity
+* Traffic is encrypted
+
+Istio automatically:
+
+* Issues certificates
+* Rotates them
+* Enforces trust between services
+
+This prevents:
+
+* Man-in-the-middle
+* Pod spoofing
+* Network attacks
+
+---
+
+# 🔷 7. How does Service Mesh improve security in Kubernetes?
+
+It provides:
+
+* mTLS encryption
+* Service-to-service authentication
+* Fine-grained authorization
+* Zero-trust networking
+
+Even if someone gets into the cluster, they **cannot call services without identity**.
+
+---
+
+# 🔷 8. What is Traffic Management in Istio?
+
+Traffic management means controlling how requests flow:
+
+* Load balancing
+* Canary deployment
+* Blue/green
+* A/B testing
+* Fault injection
+
+Example:
+
+* 90% traffic → v1
+* 10% traffic → v2
+
+---
+
+# 🔷 9. How do you do Canary deployment using Service Mesh?
+
+You create:
+
+* **VirtualService**
+* **DestinationRule**
+
+Example:
+
+```
+90% → version v1  
+10% → version v2
+```
+
+No load balancer change required.
+No DNS change required.
+Istio handles it at the proxy level.
+
+---
+
+# 🔷 10. What is Observability in Service Mesh?
+
+It provides:
+
+* **Metrics** (Prometheus)
+* **Tracing** (Jaeger)
+* **Visualization** (Kiali, Grafana)
+
+You can see:
+
+* Which service is slow
+* Which one is failing
+* How requests flow
+
+---
+
+# 🔷 11. Difference between API Gateway and Service Mesh
+
+| API Gateway                 | Service Mesh              |
+| --------------------------- | ------------------------- |
+| Handles North-South traffic | Handles East-West traffic |
+| Client → App                | Service → Service         |
+| Entry point                 | Internal communication    |
+
+Both are used together in production.
+
+---
+
+# 🔷 12. What is AWS App Mesh?
+
+AWS App Mesh is a **managed service mesh** using **Envoy** that works with:
+
+* EKS
+* ECS
+* EC2
+
+It provides:
+
+* Traffic control
+* Monitoring
+* Secure service communication
+
+---
+
+# 🔷 13. What happens when a pod joins Istio?
+
+1. Pod is created
+2. Istio injects **Envoy sidecar**
+3. Traffic flows through Envoy
+4. Istio applies:
+
+   * Routing
+   * Security
+   * Monitoring
+
+---
+
+# 🔷 14. How does Service Mesh help SRE & DevOps?
+
+It helps in:
+
+* Zero-downtime deployments
+* Debugging microservices
+* Security compliance
+* SLA monitoring
+* Traffic control during incidents
+
+Perfect for **banking & enterprise systems** where you are working.
+
+---
+
+# 🔷 15. Real-World Scenario Question
+
+**Q:** A microservice is slow and causing failures. How will Service Mesh help?
+
+**Expected Answer:**
+Using Istio:
+
+* I check metrics in **Grafana**
+* Traces in **Jaeger**
+* Service graph in **Kiali**
+  Then:
+* Add timeout
+* Add retries
+* Route traffic to healthy version
+
+No app code change needed.
+
+---
+
+If you want, next I can give you:
+👉 **Service Mesh Interview Scenarios (banking production style)**
+👉 **Istio + EKS architecture you can explain in interviews**
